@@ -19,8 +19,9 @@ def main():
     print("2. Quit game")
     print("3. Continue...")
     player_choice = input("What is your choice?: ")
-    if player_choice = "1":
-        player = displayStats(player)
+    if player_choice == "1":
+        player.displayStats(player)
+        
         
     
     
