@@ -1,32 +1,34 @@
+# creating a game where functions open a file that will save progress. 
+# you can create a file. and name it yourself. 
+# the file can essentially be "Player" the class
+# and as you prog you gain stats and you can start new if you want. 
+# functions can be places basically that you enter where the file opens in a with statement 
+# easy story to start off with nothing too serious. 
+
 class Player:
     def __init__(self, name):
         self.name = name
-        self.coins = 0 
-        self.experience = 0
+        self.coins = 0
+        self.health = 0
+
+def get_player_info():
+    with open()
+        print("Welcome to the game")
+        print("What is your name?")
+        player_name = input("Enter name: ")
+
+
+
+def menu():
     
-    def displayStats(self):
-        print({self.name})
-        print({self.coins})
-        print({self.experience})        
-        
+
+
+
+
+
 def main():
-    print("welcome to paradise")
-    player_name = input("What is your name?: ")
-    # player = player with the input name as one of the attributes
-    player = Player(player_name)
-    
-    print("1. Display stats")
-    print("2. Quit game")
-    print("3. Continue...")
-    player_choice = input("What is your choice?: ")
-    if player_choice == "1":
-        player.displayStats(player)
-        return 
-    elif player_choice == "2":
-        pass
-    else:
-        
-        
-        
-    
-    
+    menu()
+    pass
+
+if __name__ == "__main__":
+    main()
