@@ -21,6 +21,11 @@ def main():
     player_choice = input("What is your choice?: ")
     if player_choice == "1":
         player.displayStats(player)
+        return 
+    elif player_choice == "2":
+        pass
+    else:
+        
         
         
     
