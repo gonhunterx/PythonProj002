@@ -47,7 +47,7 @@ class Player:
         print(f"Username: {self.name}")
         print("Inventory:")
         for item in self.storage:
-            print(item)  # displaying the name of the items
+            print([item.name])  # displaying the name of the items
         print(f"Coins: {self.coins}")
 
     # appending items to the players storage
@@ -61,6 +61,7 @@ class Shop:
 
 
 def menu(player):
+    print("=================")
     print("Main Menu:")
     print("1. Go to mines")
     print("2. Go to the woods")
