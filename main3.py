@@ -73,6 +73,7 @@ def menu(player):
         woods(player)
     elif menu_choice == "3":
         player.display_inventory()
+        menu(player)
     elif menu_choice == "4":
         sys.exit()
     else:
