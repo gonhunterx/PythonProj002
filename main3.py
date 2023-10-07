@@ -50,6 +50,7 @@ def woods(player):
 class Player:
     def __init__(self, name):
         self.name = name
+        # somehow i need to add a limit to the items in the inventory and display [Empty] if inv empty
         self.storage = []
         self.coins = 0
 
@@ -129,6 +130,7 @@ def shop(player, shop_keeper):
             menu(player)
         else:
             print("press 1 to continue.")
+            shop(player, shop_keeper)
     elif shop_choice == "2":
         buy_item_from_player(player)
         removed_item = player.remove_first_item_from_inventory()
