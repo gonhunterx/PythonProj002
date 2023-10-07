@@ -7,7 +7,6 @@ import sys
 
 
 def mines(player):
-    print("You enter the mines.")
     mine_or_leave = input("Do you want to mine or go back?(1 or 2): ")
     if mine_or_leave == "1":
         # creating a var that acts as the IronOre class
@@ -36,7 +35,6 @@ wood_log = Item("wood log", 4)
 
 
 def woods(player):
-    print("You enter the woods.")
     cut_or_leave = input("Do you want to cut wood or go back?(1 or 2): ")
     if cut_or_leave == "1":
         wood_log = Item("wood log", 4)
@@ -57,8 +55,9 @@ class Player:
     def display_inventory(self):
         print(f"Username: {self.name}")
         print("Inventory:")
+        # create some kind of if else statement for if inv is empty
         for item in self.storage:
-            print([item.name])  # displaying the name of the items
+            print(f"- {item.name}")  # displaying the name of the items
         print(f"Coins: {self.coins}")
 
     # appending items to the players storage
@@ -72,6 +71,7 @@ class Player:
     # remaking it
     def remove_first_item_from_inventory(self):
         if self.storage:  # checking if the inventory is empty
+            # try to alter this so the player has an option
             removed_item = self.storage.pop(0)  # remove and return the first item
             return removed_item
         else:
@@ -90,26 +90,28 @@ class ShopKeeper:
     # method and this one for now. I will try to combine it later.
 
 
-def buy_item_from_player(player):
-    # item at the top of the players inventory
-    # have to get that somehow
-    # for item in len(player.storage):
-    #     print(item)
-    if wood_log in player.storage:
-        player.coins += 4
-    else:
-        player.coins += 5
-    return player
-    # # item_player_is_selling = player.storage[0]
-    # if item_player_is_selling == wood_log:
-    #     player.coins += 4
-    # else:
-    #     player.coins += 5
-    # return player
+# def buy_item_from_player(player, removed_item):
+#     # item at the top of the players inventory
+#     if removed_item == "wood log":
+#         player.coins += 4
+#         print("=============")
+#         print("+4 coins")
+#     elif removed_item == "iron ore":
+#         player.coins += 5
+#         print("=============")
+#         print("+5 coins")
+#     # for each_item in player.storage:
+#     #     print(f"{each_item}")
+#     #     pass
+#     return player
+# function that is like player gets an option to view inv
+# then choose an item from the list
+# that item then ='s chosen_item_to_sell
+# then pop that item or remove it? from the player.storage
+#
 
 
 def shop_menu():
-    print("you enter the shop and walk to the counter...")
     print("SHOP MENU:")
     print("1. Buy")
     print("2. Sell")
@@ -132,19 +134,26 @@ def shop(player, shop_keeper):
             print("press 1 to continue.")
             shop(player, shop_keeper)
     elif shop_choice == "2":
-        buy_item_from_player(player)
         removed_item = player.remove_first_item_from_inventory()
         if removed_item:
+            print("=============")
+
             # shop_keeper.add_item_to_shop(removed_item)
             player.coins += removed_item.value
-            print(f"You sold {removed_item.name}")
+            # buy_item_from_player(player, removed_item)
+            print(f"You sold {removed_item.name} +{removed_item.value} coins!")
+            print("=============")
             shop(player, shop_keeper)
         else:
+            print("=============")
             print("Your inventory is empty.")
+            print("=============")
             shop(player, shop_keeper)
     elif shop_choice == "3":
-        print("Invalid choice.")
         menu(player)
+    else:
+        print("Invalid Input.")
+        shop(player, shop_keeper)
 
 
 def menu(player):
@@ -158,13 +167,20 @@ def menu(player):
     shop_keeper = ShopKeeper()
     menu_choice = input("Input: ")
     if menu_choice == "1":
+        print("=================")
+        print("You enter the mines.")
         mines(player)
     elif menu_choice == "2":
+        print("=================")
+        print("You enter the woods.")
         woods(player)
     elif menu_choice == "3":
+        print("=================")
         player.display_inventory()
         menu(player)
     elif menu_choice == "4":
+        print("=================")
+        print("you enter the shop and walk to the counter...")
         shop(player, shop_keeper)
     elif menu_choice == "5":
         sys.exit()
@@ -190,3 +206,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# notes:
+
+# should add an option for the player to sell all of one type of item
+# along with adding a way for them to choose what type of item them want to sell
