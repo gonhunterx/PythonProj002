@@ -6,18 +6,6 @@ import sys
 #         self.name = "iron ore"
 
 
-def mines(player):
-    mine_or_leave = input("Do you want to mine or go back?(1 or 2): ")
-    if mine_or_leave == "1":
-        # creating a var that acts as the IronOre class
-        iron_ore = Item("iron ore", 5)
-        player.add_to_inventory(iron_ore)
-        print("You have obtained an iron ore!")
-        mines(player)
-    elif mine_or_leave != "1":
-        menu(player)
-
-
 class Item:
     def __init__(self, name, value):
         self.name = name
@@ -29,28 +17,16 @@ class Item:
 #     def __init__(self):
 #         self.name = "wood log"
 
-# defining items: idk if this is necessary but i think its probaby fine to have until its too large.
-iron_ore = Item("iron ore", 5)
-wood_log = Item("wood log", 4)
-
-
-def woods(player):
-    cut_or_leave = input("Do you want to cut wood or go back?(1 or 2): ")
-    if cut_or_leave == "1":
-        wood_log = Item("wood log", 4)
-        player.add_to_inventory(wood_log)
-        print("You have obtained a wood log!")
-        woods(player)
-    elif cut_or_leave != "1":
-        menu(player)
-
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, max_inventory_size):
         self.name = name
         # somehow i need to add a limit to the items in the inventory and display [Empty] if inv empty
         self.storage = []
         self.coins = 0
+        # adding a limit we will define in the main function
+        self.max_inventory_size = max_inventory_size
+        # we will also create a way to upgrade this max inv size through the shop.
 
     def display_inventory(self):
         print(f"Username: {self.name}")
@@ -62,7 +38,13 @@ class Player:
 
     # appending items to the players storage
     def add_to_inventory(self, item):
-        self.storage.append(item)
+        if len(self.storage) < self.max_inventory_size:
+            self.storage.append(item)
+        else:
+            print(f"Inventory is full. Cannot add {item.name}")
+
+    def purchase_inventory_upgrade():
+        pass
 
     # creating a remove from inv because that is just how we will handling selling items for now
     # def remove_from_inventory(self, item):
@@ -81,7 +63,7 @@ class Player:
 class ShopKeeper:
     def __init__(self):
         self.shop_inventory = ["Upgrade 1", "Upgrade 2", "Upgrade 3"]
-        self.coins = 1000
+        self.coins = 1000  # probs doesnt actually need coins but whatever.
 
     def display_inv(self):
         print(f"{self.shop_inventory}")
@@ -109,6 +91,32 @@ class ShopKeeper:
 # that item then ='s chosen_item_to_sell
 # then pop that item or remove it? from the player.storage
 #
+# defining items: idk if this is necessary but i think its probaby fine to have until its too large.
+iron_ore = Item("iron ore", 5)
+wood_log = Item("wood log", 4)
+
+
+def mines(player):
+    mine_or_leave = input("Do you want to mine or go back?(1 or 2): ")
+    if mine_or_leave == "1":
+        # creating a var that acts as the IronOre class
+        iron_ore = Item("iron ore", 5)
+        player.add_to_inventory(iron_ore)
+        print("You have obtained an iron ore!")
+        mines(player)
+    elif mine_or_leave != "1":
+        menu(player)
+
+
+def woods(player):
+    cut_or_leave = input("Do you want to cut wood or go back?(1 or 2): ")
+    if cut_or_leave == "1":
+        wood_log = Item("wood log", 4)
+        player.add_to_inventory(wood_log)
+        print("You have obtained a wood log!")
+        woods(player)
+    elif cut_or_leave != "1":
+        menu(player)
 
 
 def shop_menu():
@@ -156,6 +164,11 @@ def shop(player, shop_keeper):
         shop(player, shop_keeper)
 
 
+def get_player_name():
+    player_name = input("What is your name?: ")
+    return player_name
+
+
 def menu(player):
     print("=================")
     print("Main Menu:")
@@ -188,16 +201,11 @@ def menu(player):
         print("Invalid Choice. Please select a menu option.")
 
 
-def get_player_name():
-    player_name = input("What is your name?: ")
-    return player_name
-
-
 def main():
     # creating a player_name var to get the input of the player with the get player name func
     player_name = get_player_name()
     # make a var that passes the input from player_name into the Player class in the name position
-    player = Player(player_name)
+    player = Player(player_name, max_inventory_size=10)
     # using a loop to initiate the players instance into the menu.
 
     # shop(shop_keeper)
@@ -212,3 +220,7 @@ if __name__ == "__main__":
 
 # should add an option for the player to sell all of one type of item
 # along with adding a way for them to choose what type of item them want to sell
+
+
+# create a maxium for the items in a list and a statement
+# something like print("your inventory is full time to head back...")
