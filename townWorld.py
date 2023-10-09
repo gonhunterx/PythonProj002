@@ -31,9 +31,9 @@ def scary_temple(player):
             sys.exit()
     pass
 
-def shop(player, generation_rate):
-    
 
+def shop(player, generation_rate):
+    pass
 
 
 def battle_sequence(player):
@@ -55,6 +55,6 @@ def main():
     if choice == "1":
         scary_temple(player)
     elif choice == "2":
-        shop(player, generation_rate = 1)
+        shop(player, generation_rate=1)
     elif choice == "3":
         sys.exit()
